@@ -10,7 +10,7 @@
   <meta name="description" content="源码 定义ThreadLocal为线程本地存储，每个线程可以访问自己的内部变量。每个线程都可以通过set和get方法对这个局部变量进行操作，但不会和其他线程对局部变量进行冲突，实现了线程对数据隔离。 当我们需要在各个线程之间操作相同的对象，但每个线程内的对象都不会影响别的线程的对象的时候，可以使用ThreadLocal。 原理 每个Thread维护着一个ThreadLocalMap的引用 Thre">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ThreadLocal">
-<meta property="og:url" content="http://guxiaonian.github.io/2019/04/04/hello-world/index.html">
+<meta property="og:url" content="http://guxiaonian.github.io/2019/04/04/ThreadLocal/index.html">
 <meta property="og:site_name" content="guxiaonian">
 <meta property="og:description" content="源码 定义ThreadLocal为线程本地存储，每个线程可以访问自己的内部变量。每个线程都可以通过set和get方法对这个局部变量进行操作，但不会和其他线程对局部变量进行冲突，实现了线程对数据隔离。 当我们需要在各个线程之间操作相同的对象，但每个线程内的对象都不会影响别的线程的对象的时候，可以使用ThreadLocal。 原理 每个Thread维护着一个ThreadLocalMap的引用 Thre">
 <meta property="og:locale" content="zh">
@@ -64,9 +64,9 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-ThreadLocal" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/04/04/hello-world/" class="article-date">
+    <a href="/2019/04/04/ThreadLocal/" class="article-date">
   <time datetime="2019-04-04T07:30:20.701Z" itemprop="datePublished">2019-04-04</time>
 </a>
     
@@ -102,13 +102,27 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://guxiaonian.github.io/2019/04/04/hello-world/" data-id="cju2bv2go0000i8641ypb7bet" class="article-share-link">Share</a>
+      <a data-url="http://guxiaonian.github.io/2019/04/04/ThreadLocal/" data-id="cju2cb0ta0001ql643o5uyzbe" class="article-share-link">Share</a>
       
       
     </footer>
   </div>
   
     
+<nav id="article-nav">
+  
+    <a href="/2019/04/04/Atomic/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          原子性&amp;&amp;分子性&amp;&amp;有序性
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
   
 </article>
 
@@ -141,7 +155,11 @@
       <ul>
         
           <li>
-            <a href="/2019/04/04/hello-world/">ThreadLocal</a>
+            <a href="/2019/04/04/Atomic/">原子性&amp;&amp;分子性&amp;&amp;有序性</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/04/ThreadLocal/">ThreadLocal</a>
           </li>
         
       </ul>
