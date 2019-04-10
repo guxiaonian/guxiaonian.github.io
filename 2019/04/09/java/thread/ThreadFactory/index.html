@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>ThreadFactory | study</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="线程的工厂类 源码分析123public interface ThreadFactory &amp;#123;    Thread newThread(Runnable r);&amp;#125; ThreadFactory就是一个接口，里面实现了获取线程的方法。在这个方法中，可以自定义线程的名字以及优先级和是否为守护线程等方法。 使用123456789101112131415ThreadFactory thre">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ThreadFactory">
+<meta property="og:url" content="http://guxiaonian.github.io/2019/04/09/java/thread/ThreadFactory/index.html">
+<meta property="og:site_name" content="study">
+<meta property="og:description" content="线程的工厂类 源码分析123public interface ThreadFactory &amp;#123;    Thread newThread(Runnable r);&amp;#125; ThreadFactory就是一个接口，里面实现了获取线程的方法。在这个方法中，可以自定义线程的名字以及优先级和是否为守护线程等方法。 使用123456789101112131415ThreadFactory thre">
+<meta property="og:locale" content="zh">
+<meta property="og:updated_time" content="2019-04-09T11:17:41.946Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ThreadFactory">
+<meta name="twitter:description" content="线程的工厂类 源码分析123public interface ThreadFactory &amp;#123;    Thread newThread(Runnable r);&amp;#125; ThreadFactory就是一个接口，里面实现了获取线程的方法。在这个方法中，可以自定义线程的名字以及优先级和是否为守护线程等方法。 使用123456789101112131415ThreadFactory thre">
+  
+    <link rel="alternate" href="/atom.xml" title="study" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="https://raw.githubusercontent.com/guxiaonian/guxiaonian.github.io/master/favicon.ico" type="image/x-icon">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">study</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">只是习惯变成了爱好</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://guxiaonian.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-java/thread/ThreadFactory" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/04/09/java/thread/ThreadFactory/" class="article-date">
+  <time datetime="2019-04-09T11:17:41.946Z" itemprop="datePublished">2019-04-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      ThreadFactory
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>线程的工厂类</p>
+<h1 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a>源码分析</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">ThreadFactory</span> </span>&#123;</span><br><span class="line">    <span class="function">Thread <span class="title">newThread</span><span class="params">(Runnable r)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>ThreadFactory就是一个接口，里面实现了获取线程的方法。在这个方法中，可以自定义线程的名字以及优先级和是否为守护线程等方法。</p>
+<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">ThreadFactory threadFactory = <span class="keyword">new</span> ThreadFactory() &#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> Thread <span class="title">newThread</span><span class="params">(@NonNull Runnable r)</span> </span>&#123;</span><br><span class="line">            Thread thread = <span class="keyword">new</span> Thread(r);</span><br><span class="line">            thread.setName(<span class="string">"ss"</span>);</span><br><span class="line">            <span class="keyword">return</span> thread;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">    Thread thread = threadFactory.newThread(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            Log.e(TAG, Thread.currentThread().getName());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    thread.start();</span><br></pre></td></tr></table></figure>
+<p>ThreadFactory是工厂设计模式，是一种创建型设计模式，能够用于创建一个类或多个类所需要的对象。利用这个，可以集中的创建对象。集中创建对象带来的<br>好处有:</p>
+<ul>
+<li>能够很容易的改变类创建的对象或者创建对象的方式</li>
+<li>能够很容易的限制对象的创建</li>
+<li>能够很容易的生成有关对象创建的统计数据</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://guxiaonian.github.io/2019/04/09/java/thread/ThreadFactory/" data-id="cjuak2v080004lq64h32y0bo1" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/04/10/java/thread/HandlerThread/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          HandlerThread
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/04/09/java/thread/ThreadLocal/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">ThreadLocal</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/04/10/java/thread/HandlerThread/">HandlerThread</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/09/java/thread/ThreadFactory/">ThreadFactory</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/09/java/thread/ThreadLocal/">ThreadLocal</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/09/java/thread/Thread/">Thread</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/04/java/atomic/Atomic/">原子性&amp;&amp;分子性&amp;&amp;有序性</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 guxiaonian<br>
+      Powered by <a href="https://github.com/guxiaonian/guxiaonian.github.io" target="_blank">Fairy</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<!--<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>-->
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

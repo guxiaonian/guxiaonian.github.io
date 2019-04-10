@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>ThreadLocal | study</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="线程本地存储 定义ThreadLocal为线程本地存储，每个线程可以访问自己的内部变量。每个线程都可以通过set和get方法对这个局部变量进行操作，但不会和其他线程对局部变量进行冲突，实现了线程对数据隔离。 当我们需要在各个线程之间操作相同的对象，但每个线程内的对象都不会影响别的线程的对象的时候，可以使用ThreadLocal。 原理 每个Thread维护着一个ThreadLocalMap的引用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ThreadLocal">
+<meta property="og:url" content="http://guxiaonian.github.io/2019/04/09/java/thread/ThreadLocal/index.html">
+<meta property="og:site_name" content="study">
+<meta property="og:description" content="线程本地存储 定义ThreadLocal为线程本地存储，每个线程可以访问自己的内部变量。每个线程都可以通过set和get方法对这个局部变量进行操作，但不会和其他线程对局部变量进行冲突，实现了线程对数据隔离。 当我们需要在各个线程之间操作相同的对象，但每个线程内的对象都不会影响别的线程的对象的时候，可以使用ThreadLocal。 原理 每个Thread维护着一个ThreadLocalMap的引用">
+<meta property="og:locale" content="zh">
+<meta property="og:updated_time" content="2019-04-09T06:33:37.403Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ThreadLocal">
+<meta name="twitter:description" content="线程本地存储 定义ThreadLocal为线程本地存储，每个线程可以访问自己的内部变量。每个线程都可以通过set和get方法对这个局部变量进行操作，但不会和其他线程对局部变量进行冲突，实现了线程对数据隔离。 当我们需要在各个线程之间操作相同的对象，但每个线程内的对象都不会影响别的线程的对象的时候，可以使用ThreadLocal。 原理 每个Thread维护着一个ThreadLocalMap的引用">
+  
+    <link rel="alternate" href="/atom.xml" title="study" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="https://raw.githubusercontent.com/guxiaonian/guxiaonian.github.io/master/favicon.ico" type="image/x-icon">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">study</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">只是习惯变成了爱好</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://guxiaonian.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-java/thread/ThreadLocal" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/04/09/java/thread/ThreadLocal/" class="article-date">
+  <time datetime="2019-04-09T06:33:37.403Z" itemprop="datePublished">2019-04-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      ThreadLocal
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>线程本地存储</p>
+<h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><p>ThreadLocal为线程本地存储，每个线程可以访问自己的内部变量。每个线程都可以通过set和get方法对这个局部变量进行操作，但不会和其他线程对局部变量进行冲突，实现了线程对数据隔离。</p>
+<p>当我们需要在各个线程之间操作相同的对象，但每个线程内的对象都不会影响别的线程的对象的时候，可以使用ThreadLocal。</p>
+<h1 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h1><ul>
+<li>每个Thread维护着一个ThreadLocalMap的引用</li>
+<li>ThreadLocalMap是ThreadLocal的内部类，用Entry来进行存储</li>
+<li>调用ThreadLocal的set方法时，实际上就是往ThreadLocalMap设置值，key是ThreadLocal对象，值是传递进来的对象</li>
+<li>调用ThreadLocal的get方法时，实际上就是往ThreadLocalMap获取值，key是ThreadLocal对象</li>
+<li>ThreadLocal本身并不存储，只是作为一个key来从ThreadLocalMap获取value</li>
+</ul>
+<h1 id="内存泄露"><a href="#内存泄露" class="headerlink" title="内存泄露"></a>内存泄露</h1><p>ThreadLocal的生命周期跟Thread一样长，如果没有手动删除对应key就会内存泄露，而不是因为弱引用，想要避免内存泄露就实现remove方法。</p>
+<p>ThreadLocal的目的是为了在线程中有属于自己的变量，并不是为了解决并发或者共享变量的问题。</p>
+<h1 id="代码示例"><a href="#代码示例" class="headerlink" title="代码示例"></a>代码示例</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> ThreadLocal&lt;String&gt; stringThreadLocal = <span class="keyword">new</span> ThreadLocal&lt;&gt;();</span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">threadLocalDemo</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        stringThreadLocal.set(<span class="string">"my"</span>);</span><br><span class="line">        stringThreadLocal.get();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://guxiaonian.github.io/2019/04/09/java/thread/ThreadLocal/" data-id="cjuak2v010001lq64uznyq30r" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/04/09/java/thread/ThreadFactory/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          ThreadFactory
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/04/09/java/thread/Thread/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Thread</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/04/10/java/thread/HandlerThread/">HandlerThread</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/09/java/thread/ThreadFactory/">ThreadFactory</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/09/java/thread/ThreadLocal/">ThreadLocal</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/09/java/thread/Thread/">Thread</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/04/java/atomic/Atomic/">原子性&amp;&amp;分子性&amp;&amp;有序性</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 guxiaonian<br>
+      Powered by <a href="https://github.com/guxiaonian/guxiaonian.github.io" target="_blank">Fairy</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<!--<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>-->
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
