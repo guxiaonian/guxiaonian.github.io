@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>ThreadPoolExecutor | study</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="ThreadPoolExecutor是ExecutorService的一个实现类，是java中最常见的线程池类。 构造函数以参数最多的构造函数为例，分析各个参数的作用。 1234567public ThreadPoolExecutor(int corePoolSize,                             int maximumPoolSize,">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ThreadPoolExecutor">
+<meta property="og:url" content="http://guxiaonian.github.io/2019/04/11/java/threadpool/ThreadPoolExecutor/index.html">
+<meta property="og:site_name" content="study">
+<meta property="og:description" content="ThreadPoolExecutor是ExecutorService的一个实现类，是java中最常见的线程池类。 构造函数以参数最多的构造函数为例，分析各个参数的作用。 1234567public ThreadPoolExecutor(int corePoolSize,                             int maximumPoolSize,">
+<meta property="og:locale" content="zh">
+<meta property="og:image" content="http://guxiaonian.github.io/imgs/blocking_queue.png">
+<meta property="og:updated_time" content="2019-04-11T09:22:16.566Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ThreadPoolExecutor">
+<meta name="twitter:description" content="ThreadPoolExecutor是ExecutorService的一个实现类，是java中最常见的线程池类。 构造函数以参数最多的构造函数为例，分析各个参数的作用。 1234567public ThreadPoolExecutor(int corePoolSize,                             int maximumPoolSize,">
+<meta name="twitter:image" content="http://guxiaonian.github.io/imgs/blocking_queue.png">
+  
+    <link rel="alternate" href="/atom.xml" title="study" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="https://raw.githubusercontent.com/guxiaonian/guxiaonian.github.io/master/favicon.ico" type="image/x-icon">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">study</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">只是习惯变成了爱好</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://guxiaonian.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-java/threadpool/ThreadPoolExecutor" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/04/11/java/threadpool/ThreadPoolExecutor/" class="article-date">
+  <time datetime="2019-04-11T09:22:16.566Z" itemprop="datePublished">2019-04-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      ThreadPoolExecutor
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>ThreadPoolExecutor是ExecutorService的一个实现类，是java中最常见的线程池类。</p>
+<h1 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h1><p>以参数最多的构造函数为例，分析各个参数的作用。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public ThreadPoolExecutor(int corePoolSize,</span><br><span class="line">                             int maximumPoolSize,</span><br><span class="line">                             long keepAliveTime,</span><br><span class="line">                             TimeUnit unit,</span><br><span class="line">                             BlockingQueue&lt;Runnable&gt; workQueue,</span><br><span class="line">                             ThreadFactory threadFactory,</span><br><span class="line">                             RejectedExecutionHandler handler)</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>参数格式</th>
+<th>参数解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>corePoolSize</td>
+<td>int</td>
+<td>线程池维护线程的最小数量</td>
+<td></td>
+</tr>
+<tr>
+<td>maximumPoolSize</td>
+<td>int</td>
+<td>线程池维护线程的最大数量</td>
+<td></td>
+</tr>
+<tr>
+<td>keepAliveTime</td>
+<td>long</td>
+<td>线程池中空闲线程的空闲时间，超过规定时间会回收</td>
+<td></td>
+</tr>
+<tr>
+<td>unit</td>
+<td>TimeUnit</td>
+<td>空闲时间的单位</td>
+<td></td>
+</tr>
+<tr>
+<td>workQueue</td>
+<td>BlockingQueue</td>
+<td>线程池所使用的缓冲队列</td>
+<td></td>
+</tr>
+<tr>
+<td>threadFactory</td>
+<td>ThreadFactory</td>
+<td>设置的线程工厂类</td>
+<td></td>
+</tr>
+<tr>
+<td>handler</td>
+<td>RejectedExecutionHandler</td>
+<td>线程池对拒绝任务的处理策略</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="corePoolSize与maximumPoolSize"><a href="#corePoolSize与maximumPoolSize" class="headerlink" title="corePoolSize与maximumPoolSize"></a>corePoolSize与maximumPoolSize</h2><p>当一个线程被添加到线程池后，具体的分配规则如下:</p>
+<ul>
+<li>如果此时线程池的数量小于corePoolSize，则每来一个任务，都会创建一个新的线程执行这个任务。</li>
+<li>如果此时线程池的数量大于等于corePoolSize，则每来一个任务，会尝试添加到任务缓冲队列当中，若添加成功，则该任务会等待空闲线程来执行此任务。如果添加<br>失败，表示任务缓冲队列已满，则会创建一个新的线程来执行这个任务。</li>
+<li>如果此时线程池的数量大于corePoolSize，如果某个线程的空闲时间超过keepAliveTime，则线程将会被终止，直至线程池的线程数目等于corePoolSize。<br>即使规定核心线程的存活时间，线程也会被终止。</li>
+<li>如果此时线程池的数量大于或等于corePoolSize，则会采取拒绝任务策略来处理。</li>
+</ul>
+<h2 id="workQueue"><a href="#workQueue" class="headerlink" title="workQueue"></a>workQueue</h2><p><img src="../../../../../../imgs/blocking_queue.png" alt></p>
+<p>workQueue是一个BlockingQueue，默认是LinkedBlockingQueue<runnable>。</runnable></p>
+<p>当我们创建线程池的时候，如果没有新任务进来的话，默认是没有线程的。提交任务后才会创建新的线程。如果想要初始化corePoolSize数量的线程的话，线程池提供了<br>以下两个方法:</p>
+<ul>
+<li>prestartCoreThread() 立即初始化一个线程</li>
+<li>prestartAllCoreThreads() 立即初始化corePoolSize数量的线程</li>
+</ul>
+<p>当创建的线程数量大于corePoolSize后，新来的任务会被加入到堵塞队列中等待有空闲线程来执行。类型为BlockingQueue。有以下三种实现类型</p>
+<ol>
+<li>ArrayBlockingQueue</li>
+</ol>
+<p>基于数组的先进先出队列，是有界的，创建时必须制定大小。</p>
+<p>可以防止资源耗尽。但是在java中不推荐使用。</p>
+<ol start="2">
+<li>LinkedBlockingQueue</li>
+</ol>
+<p>基于链表的先进先出队列，是无界的，默认大小是Integer.MAX_VALUE。</p>
+<p>默认创建线程池的时候，策略就是这个。但是也可以制定大小使之变成有界的。当为无界时，在线程数量等于corePoolSize之后，永远不会创建新的线程。<br>所有增加的线程都会被添加到缓存队列中。这样的话资源会有被耗尽的危险。</p>
+<p>在Executors中的实现方式</p>
+<p>2.1 newFixedThreadPool</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public static ExecutorService newFixedThreadPool(int nThreads) &#123;</span><br><span class="line">     return new ThreadPoolExecutor(nThreads, nThreads,</span><br><span class="line">                                   0L, TimeUnit.MILLISECONDS,</span><br><span class="line">                                   new LinkedBlockingQueue&lt;Runnable&gt;());</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<p>可以看到，创建了制定线程个数的线程池，当线程空闲时候，立马进行回收(但是由于线程永远都是这些，所以并不会回收，线程还是在的)。制定线程数量当线程池使用的也是无界队列。</p>
+<p>2.2 newSingleThreadExecutor</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public static ExecutorService newSingleThreadExecutor() &#123;</span><br><span class="line">        return new FinalizableDelegatedExecutorService</span><br><span class="line">            (new ThreadPoolExecutor(1, 1,</span><br><span class="line">                                    0L, TimeUnit.MILLISECONDS,</span><br><span class="line">                                    new LinkedBlockingQueue&lt;Runnable&gt;()));</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>可以看到，创建一个有唯一线程的线程池。所有的任务都按照顺序执行。单个线程池使用的也是无界队列。</p>
+<ol start="3">
+<li>SynchronousQueue</li>
+</ol>
+<p>无界队列，不会保存任务，每一个新增任务的线程必须等待另一个线程取出任务，这个队列只能添加一个任务，并且这个任务只有被执行完成之后，<br>才能继续添加。否则就要创建线程来执行任务，所以使用SynchronousQueue最好线程池最大数量为Integer.MAX_VALUE。</p>
+<p>3.1 newCachedThreadPool</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public static ExecutorService newCachedThreadPool() &#123;</span><br><span class="line">        return new ThreadPoolExecutor(0, Integer.MAX_VALUE,</span><br><span class="line">                                      60L, TimeUnit.SECONDS,</span><br><span class="line">                                      new SynchronousQueue&lt;Runnable&gt;());</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>可以看到，创建一个最大数量的线程池。当线程空闲时间为60s之后，使之回收。</p>
+<h2 id="handler"><a href="#handler" class="headerlink" title="handler"></a>handler</h2><p>拒绝任务的处理策略。</p>
+<ul>
+<li>ThreadPoolExecutor.AbortPolicy()。系统默认，抛出java.util.concurrent.RejectedExecutionException异常。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public static class AbortPolicy implements RejectedExecutionHandler &#123;</span><br><span class="line">     public AbortPolicy() &#123; &#125;</span><br><span class="line">     public void rejectedExecution(Runnable r, ThreadPoolExecutor e) &#123;</span><br><span class="line">         throw new RejectedExecutionException(&quot;Task &quot; + r.toString() +</span><br><span class="line">                                              &quot; rejected from &quot; +</span><br><span class="line">                                              e.toString());</span><br><span class="line">     &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>ThreadPoolExecutor.CallerRunsPolicy()。当抛出RejectedExecutionException异常时，会调用rejectedExecution方法。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public static class CallerRunsPolicy implements RejectedExecutionHandler &#123;</span><br><span class="line">     public CallerRunsPolicy() &#123; &#125;</span><br><span class="line">     public void rejectedExecution(Runnable r, ThreadPoolExecutor e) &#123;</span><br><span class="line">         if (!e.isShutdown()) &#123;</span><br><span class="line">             r.run();</span><br><span class="line">         &#125;</span><br><span class="line">     &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>ThreadPoolExecutor.DiscardOldestPolicy()。抛弃旧的任务。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public static class DiscardOldestPolicy implements RejectedExecutionHandler &#123;</span><br><span class="line">       public DiscardOldestPolicy() &#123; &#125;</span><br><span class="line">       public void rejectedExecution(Runnable r, ThreadPoolExecutor e) &#123;</span><br><span class="line">           if (!e.isShutdown()) &#123;</span><br><span class="line">               e.getQueue().poll();</span><br><span class="line">               e.execute(r);</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>ThreadPoolExecutor.DiscardPolicy()。抛弃当前的任务。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public static class DiscardPolicy implements RejectedExecutionHandler &#123;</span><br><span class="line">       public DiscardPolicy() &#123; &#125;</span><br><span class="line">       public void rejectedExecution(Runnable r, ThreadPoolExecutor e) &#123;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://guxiaonian.github.io/2019/04/11/java/threadpool/ThreadPoolExecutor/" data-id="cjuc1xcqx0003ua64wxfzl47q" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2019/04/11/java/threadpool/ScheduledThreadPoolExecutor/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">ScheduledThreadPoolExecutor</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/04/11/java/threadpool/ThreadPoolExecutor/">ThreadPoolExecutor</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/11/java/threadpool/ScheduledThreadPoolExecutor/">ScheduledThreadPoolExecutor</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/10/java/threadpool/ExecutorService/">ExecutorService</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/10/java/thread/Thread/">Thread</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/10/java/thread/HandlerThread/">HandlerThread</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 guxiaonian<br>
+      Powered by <a href="https://github.com/guxiaonian/guxiaonian.github.io" target="_blank">Fairy</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<!--<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>-->
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>Thread | study</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="线程，可以看作是进程的一个实体，是CPU调度和分派的基本单位，是比进程更小的能独立运行的基本单位。 主要函数run()线程运行所执行的代码。调用的是runnable内的run方法，发生的线程是调用run方法的线程 start()启动线程。启动线程来执行，发生的线程是创建的子线程 sleep(long millis),sleep(long millis,int nanos)第一个方法表示休眠多少毫秒">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Thread">
+<meta property="og:url" content="http://guxiaonian.github.io/2019/04/10/java/thread/Thread/index.html">
+<meta property="og:site_name" content="study">
+<meta property="og:description" content="线程，可以看作是进程的一个实体，是CPU调度和分派的基本单位，是比进程更小的能独立运行的基本单位。 主要函数run()线程运行所执行的代码。调用的是runnable内的run方法，发生的线程是调用run方法的线程 start()启动线程。启动线程来执行，发生的线程是创建的子线程 sleep(long millis),sleep(long millis,int nanos)第一个方法表示休眠多少毫秒">
+<meta property="og:locale" content="zh">
+<meta property="og:updated_time" content="2019-04-10T08:08:19.288Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Thread">
+<meta name="twitter:description" content="线程，可以看作是进程的一个实体，是CPU调度和分派的基本单位，是比进程更小的能独立运行的基本单位。 主要函数run()线程运行所执行的代码。调用的是runnable内的run方法，发生的线程是调用run方法的线程 start()启动线程。启动线程来执行，发生的线程是创建的子线程 sleep(long millis),sleep(long millis,int nanos)第一个方法表示休眠多少毫秒">
+  
+    <link rel="alternate" href="/atom.xml" title="study" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="https://raw.githubusercontent.com/guxiaonian/guxiaonian.github.io/master/favicon.ico" type="image/x-icon">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">study</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">只是习惯变成了爱好</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://guxiaonian.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-java/thread/Thread" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/04/10/java/thread/Thread/" class="article-date">
+  <time datetime="2019-04-10T08:08:19.288Z" itemprop="datePublished">2019-04-10</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Thread
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>线程，可以看作是进程的一个实体，是CPU调度和分派的基本单位，是比进程更小的能独立运行的基本单位。</p>
+<h1 id="主要函数"><a href="#主要函数" class="headerlink" title="主要函数"></a>主要函数</h1><h2 id="run"><a href="#run" class="headerlink" title="run()"></a>run()</h2><p>线程运行所执行的代码。调用的是runnable内的run方法，发生的线程是调用run方法的线程</p>
+<h2 id="start"><a href="#start" class="headerlink" title="start()"></a>start()</h2><p>启动线程。启动线程来执行，发生的线程是创建的子线程</p>
+<h2 id="sleep-long-millis-sleep-long-millis-int-nanos"><a href="#sleep-long-millis-sleep-long-millis-int-nanos" class="headerlink" title="sleep(long millis),sleep(long millis,int nanos)"></a>sleep(long millis),sleep(long millis,int nanos)</h2><p>第一个方法表示休眠多少毫秒，第二个方法表示休眠多少纳秒，为第一个参数毫秒转成纳秒(*1000000)加上第二个参数。</p>
+<p>线程休眠，交出CPU，让CPU执行其他任务。但是sleep方法不会释放锁，也就是说如果当前线程持有某个对象的锁，即使调用sleep方法，其他线程也无法访问这个对象。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">demo</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        MyThread myThread1=<span class="keyword">new</span> MyThread();</span><br><span class="line">        MyThread myThread2=<span class="keyword">new</span> MyThread();</span><br><span class="line">        myThread1.start();</span><br><span class="line">        myThread2.start();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">private</span>  <span class="keyword">static</span> <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Object object = <span class="keyword">new</span> Object();</span><br><span class="line">    <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">MyThread</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">synchronized</span> (object) &#123;</span><br><span class="line">                i++;</span><br><span class="line">                System.out.println(i);</span><br><span class="line">                System.out.println(<span class="string">"线程"</span>+Thread.currentThread().getName()+<span class="string">"进入睡眠状态"</span>);</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    Thread.sleep(<span class="number">1000</span>);</span><br><span class="line">                &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">                System.out.println(<span class="string">"线程"</span>+Thread.currentThread().getName()+<span class="string">"睡眠结束"</span>);</span><br><span class="line">                i++;</span><br><span class="line">                System.out.println(i);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>控制台输出为</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span></span><br><span class="line">线程Thread-<span class="number">0</span>进入睡眠状态</span><br><span class="line">线程Thread-<span class="number">0</span>睡眠结束</span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="number">3</span></span><br><span class="line">线程Thread-<span class="number">1</span>进入睡眠状态</span><br><span class="line">线程Thread-<span class="number">1</span>睡眠结束</span><br><span class="line"><span class="number">4</span></span><br></pre></td></tr></table></figure>
+<p>从上面的例子可以看出，当Thread-0进入休眠之后，Thread-1并没有马上执行任务，当Thread-0任务执行完成之后，Thread-1才开始执行。</p>
+<p>如果调用了sleep方法，必须捕获相关异常。当睡眠时间完成之后，不一定会立即得到执行，因为此时可能CPU正在执行其他任务，所以说sleep相当于让线程进入阻塞状态。</p>
+<h2 id="yield"><a href="#yield" class="headerlink" title="yield()"></a>yield()</h2><p>调用yield方法会让当前线程交出CPU，让CPU去执行其他的线程。跟sleep类似，同样不会释放锁，但是yield没办法控制交出CPU的时间。<br>并且，yield只能让拥有相同优先级的线程有获取CPU执行时间的机会。</p>
+<p>调用yield不会让线程进入阻塞状态，而是让线程重新回到就绪状态，只需要等待重新获取CPU执行时间。</p>
+<h2 id="join-join-long-millis-join-long-millis-int-nanos"><a href="#join-join-long-millis-join-long-millis-int-nanos" class="headerlink" title="join(),join(long millis),join(long millis, int nanos)"></a>join(),join(long millis),join(long millis, int nanos)</h2><p>调用join方法会让当前线程执行完成之后，才会继续向下执行。调用无参的方法，则表示等到当前线程执行完成之后向下执行，调用有参的方法表示等待多长时间，如果在<br>等待的时间内完成，则马上向下执行，如果没有完成，则等待到设置的时间后，马上向下执行。join方法内部调用的是Object的wait方法，是会阻塞线程的。由于wait方法<br>会让线程进入阻塞状态，并且会释放线程占有的锁，交出CPU的执行权限，所以join方法与wait方法一样，释放线程锁，线程进入阻塞状态。</p>
+<h2 id="wait-wait-long-millis-wait-long-millis-int-nanos"><a href="#wait-wait-long-millis-wait-long-millis-int-nanos" class="headerlink" title="wait(),wait(long millis),wait(long millis, int nanos)"></a>wait(),wait(long millis),wait(long millis, int nanos)</h2><p>线程等待的方法，会让线程进入阻塞状态，并且会释放线程占有的锁，交出CPU的执行权限。</p>
+<h2 id="interrupt"><a href="#interrupt" class="headerlink" title="interrupt()"></a>interrupt()</h2><p>中断线程，只能中断阻塞状态的线程(join,sleep,wait等)。如果想要中断非阻塞状态的线程，则需要用可见性的volatile来标示boolean变量，来实现方法的不执行。</p>
+<h2 id="getId"><a href="#getId" class="headerlink" title="getId()"></a>getId()</h2><p>获取线程的ID，是静态变量，随着创建线程的增加而变大。</p>
+<h2 id="getName-setName"><a href="#getName-setName" class="headerlink" title="getName(),setName()"></a>getName(),setName()</h2><p>获取或设置线程的名字</p>
+<h2 id="getPriority-setPriority"><a href="#getPriority-setPriority" class="headerlink" title="getPriority(),setPriority()"></a>getPriority(),setPriority()</h2><p>获取或设置线程的优先级，区间为1-10，默认值为5</p>
+<h2 id="setDaemon-isDaemon"><a href="#setDaemon-isDaemon" class="headerlink" title="setDaemon(),isDaemon()"></a>setDaemon(),isDaemon()</h2><p>设置或判断当前线程是否是守护线程。守护线程依赖与创建它的线程，而用户线程不依赖。在主线程创建一个守护线程，当主线程执行完之后，守护线程也会随着消失，而用户线程则不会。</p>
+<h2 id="currentThread"><a href="#currentThread" class="headerlink" title="currentThread()"></a>currentThread()</h2><p>静态函数获取当前线程</p>
+<h2 id="isAlive"><a href="#isAlive" class="headerlink" title="isAlive()"></a>isAlive()</h2><p>判断当前线程是否是死亡状态</p>
+<h1 id="状态"><a href="#状态" class="headerlink" title="状态"></a>状态</h1><ul>
+<li>新建状态(new):实例化之后进入该状态</li>
+<li>就绪状态(runnable):线程调用start()之后，进入就绪状态等待CPU执行。这时只是表示可以运行，但不表示已经运行</li>
+<li>运行状态(running):线程获得CPU的执行，开始执行run方法内的代码</li>
+<li>阻塞状态(blocked):线程进入阻塞状态，比如:join,sleep,wait。等待触发条件，等待由别的线程占用的锁</li>
+<li>死亡状态(dead):线程运行完毕或者异常退出，可使用isAlive获取状态</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://guxiaonian.github.io/2019/04/10/java/thread/Thread/" data-id="cjuc1xcr90007ua64wy4popou" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/04/10/java/threadpool/ExecutorService/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          ExecutorService
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/04/10/java/thread/HandlerThread/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">HandlerThread</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/04/11/java/threadpool/ThreadPoolExecutor/">ThreadPoolExecutor</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/11/java/threadpool/ScheduledThreadPoolExecutor/">ScheduledThreadPoolExecutor</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/10/java/threadpool/ExecutorService/">ExecutorService</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/10/java/thread/Thread/">Thread</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/10/java/thread/HandlerThread/">HandlerThread</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 guxiaonian<br>
+      Powered by <a href="https://github.com/guxiaonian/guxiaonian.github.io" target="_blank">Fairy</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<!--<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>-->
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

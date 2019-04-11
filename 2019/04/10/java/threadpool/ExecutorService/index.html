@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>ExecutorService | study</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="ExecutorService是对线程池定义的接口。接口定义了后台任务执行的相关方法。 123456789101112131415161718public interface ExecutorService extends Executor&amp;#123;      void shutdown();      List&amp;lt;Runnable&amp;gt; shutdownNow();      boole">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ExecutorService">
+<meta property="og:url" content="http://guxiaonian.github.io/2019/04/10/java/threadpool/ExecutorService/index.html">
+<meta property="og:site_name" content="study">
+<meta property="og:description" content="ExecutorService是对线程池定义的接口。接口定义了后台任务执行的相关方法。 123456789101112131415161718public interface ExecutorService extends Executor&amp;#123;      void shutdown();      List&amp;lt;Runnable&amp;gt; shutdownNow();      boole">
+<meta property="og:locale" content="zh">
+<meta property="og:updated_time" content="2019-04-10T11:06:46.895Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ExecutorService">
+<meta name="twitter:description" content="ExecutorService是对线程池定义的接口。接口定义了后台任务执行的相关方法。 123456789101112131415161718public interface ExecutorService extends Executor&amp;#123;      void shutdown();      List&amp;lt;Runnable&amp;gt; shutdownNow();      boole">
+  
+    <link rel="alternate" href="/atom.xml" title="study" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="https://raw.githubusercontent.com/guxiaonian/guxiaonian.github.io/master/favicon.ico" type="image/x-icon">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">study</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">只是习惯变成了爱好</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://guxiaonian.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-java/threadpool/ExecutorService" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/04/10/java/threadpool/ExecutorService/" class="article-date">
+  <time datetime="2019-04-10T11:06:46.895Z" itemprop="datePublished">2019-04-10</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      ExecutorService
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>ExecutorService是对线程池定义的接口。接口定义了后台任务执行的相关方法。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">ExecutorService</span> <span class="keyword">extends</span> <span class="title">Executor</span></span>&#123;</span><br><span class="line">      <span class="function"><span class="keyword">void</span> <span class="title">shutdown</span><span class="params">()</span></span>;</span><br><span class="line">      <span class="function">List&lt;Runnable&gt; <span class="title">shutdownNow</span><span class="params">()</span></span>;</span><br><span class="line">      <span class="function"><span class="keyword">boolean</span> <span class="title">isShutdown</span><span class="params">()</span></span>;</span><br><span class="line">      <span class="function"><span class="keyword">boolean</span> <span class="title">isTerminated</span><span class="params">()</span></span>;</span><br><span class="line">      <span class="function"><span class="keyword">boolean</span> <span class="title">awaitTermination</span><span class="params">(<span class="keyword">long</span> timeout, TimeUnit unit)</span></span>;</span><br><span class="line">      &lt;T&gt; <span class="function">Future&lt;T&gt; <span class="title">submit</span><span class="params">(Callable&lt;T&gt; task)</span></span>;</span><br><span class="line">      &lt;T&gt; <span class="function">Future&lt;T&gt; <span class="title">submit</span><span class="params">(Runnable task, T result)</span></span>;</span><br><span class="line">      Future&lt;?&gt; submit(Runnable task);</span><br><span class="line">      &lt;T&gt; List&lt;Future&lt;T&gt;&gt; invokeAll(Collection&lt;? extends Callable&lt;T&gt;&gt; tasks);</span><br><span class="line">      &lt;T&gt; List&lt;Future&lt;T&gt;&gt; invokeAll(Collection&lt;? extends Callable&lt;T&gt;&gt; tasks,<span class="keyword">long</span> timeout, TimeUnit unit);</span><br><span class="line">      &lt;T&gt; <span class="function">T <span class="title">invokeAny</span><span class="params">(Collection&lt;? extends Callable&lt;T&gt;&gt; tasks)</span></span>;</span><br><span class="line">      &lt;T&gt; <span class="function">T <span class="title">invokeAny</span><span class="params">(Collection&lt;? extends Callable&lt;T&gt;&gt; tasks,<span class="keyword">long</span> timeout, TimeUnit unit)</span></span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Executor</span> </span>&#123;</span><br><span class="line">      <span class="function"><span class="keyword">void</span> <span class="title">execute</span><span class="params">(Runnable command)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="方法说明"><a href="#方法说明" class="headerlink" title="方法说明"></a>方法说明</h1><h2 id="shutdown"><a href="#shutdown" class="headerlink" title="shutdown()"></a>shutdown()</h2><p>线程池使用完之后，应该进行关闭。调用shutdown方法，ExecutorService不会马上关闭，但是不再接收新的任务，直到当前线程执行完成之后才会关闭。<br>所以shutdown之前的提交的任务都会被执行。</p>
+<h2 id="shutdownNow"><a href="#shutdownNow" class="headerlink" title="shutdownNow()"></a>shutdownNow()</h2><p>执行这个方法的时候，会跳过正在执行的任务和被提交还没有执行的任务，然后依次执行线程的interrupt中断方法。但是只会中断阻塞的方法，对正在执行的任务，<br>并不能保证是否能停止。并且会返回未执行的任务。</p>
+<h2 id="isShutdown"><a href="#isShutdown" class="headerlink" title="isShutdown()"></a>isShutdown()</h2><p>当调用shutdown或shutdownNow方法后返回为true。</p>
+<h2 id="isTerminated"><a href="#isTerminated" class="headerlink" title="isTerminated()"></a>isTerminated()</h2><p>当调用shutdown后，并且所有提交的任务都完成后返回true。<br>当调用shutdownNow后，成功停止后返回true。</p>
+<h2 id="awaitTermination-long-timeout-TimeUnit-unit"><a href="#awaitTermination-long-timeout-TimeUnit-unit" class="headerlink" title="awaitTermination(long timeout, TimeUnit unit)"></a>awaitTermination(long timeout, TimeUnit unit)</h2><p>等待设置的时间，来判断当前任务是否执行完。一般与shutdown搭配使用来判断是否任务执行完成。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ExecutorService pool = Executors.newFixedThreadPool(5);</span><br><span class="line">pool.shutdown();</span><br><span class="line">    while (!service.awaitTermination(1, TimeUnit.SECONDS)) &#123;</span><br><span class="line">         System.out.println(&quot;线程池没有关闭&quot;);</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">         System.out.println(&quot;线程池已经关闭&quot;);</span><br></pre></td></tr></table></figure>
+<h2 id="execute-Runnable-command"><a href="#execute-Runnable-command" class="headerlink" title="execute(Runnable command)"></a>execute(Runnable command)</h2><p>异步执行任务，但是没有办法获取任务执行的结果。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ExecutorService executorService= Executors.newSingleThreadExecutor();</span><br><span class="line">    executorService.execute(new Runnable() &#123;</span><br><span class="line">        @Override</span><br><span class="line">        public void run() &#123;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br></pre></td></tr></table></figure>
+<h2 id="submit-Callable-task"><a href="#submit-Callable-task" class="headerlink" title="submit(Callable task)"></a>submit(Callable<t> task)</t></h2><p>异步执行任务，返回Future对象，并且接收的是callable，有返回值，可以通过future.get获取。future.get方法会阻塞线程。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">ExecutorService executorService = Executors.newSingleThreadExecutor();</span><br><span class="line">Future future = executorService.submit(new Callable&lt;Object&gt;() &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public Object call() &#123;</span><br><span class="line">        return 1+1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line">try &#123;</span><br><span class="line">    Log.i(TAG,&quot;返回值为&quot;+future.get());</span><br><span class="line">&#125; catch (ExecutionException e) &#123;</span><br><span class="line">    e.printStackTrace();</span><br><span class="line">&#125; catch (InterruptedException e) &#123;</span><br><span class="line">    e.printStackTrace();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>结果为:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">返回值为2</span><br></pre></td></tr></table></figure>
+<h2 id="submit-Runnable-task-T-result"><a href="#submit-Runnable-task-T-result" class="headerlink" title="submit(Runnable task, T result)"></a>submit(Runnable task, T result)</h2><p>返回Future对象。但是接收的是Runnable对象，是没有返回值的，第二个参数就规定了一个返回值，然后通过future.get获取的就是第二个参数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">ExecutorService executorService = Executors.newSingleThreadExecutor();</span><br><span class="line">       Future future = executorService.submit(new Runnable() &#123;</span><br><span class="line">           @Override</span><br><span class="line">           public void run() &#123;</span><br><span class="line"></span><br><span class="line">           &#125;</span><br><span class="line">       &#125;,1+1);</span><br><span class="line"></span><br><span class="line">       try &#123;</span><br><span class="line">           Log.i(TAG,&quot;返回值为&quot;+future.get());</span><br><span class="line">       &#125; catch (ExecutionException e) &#123;</span><br><span class="line">           e.printStackTrace();</span><br><span class="line">       &#125; catch (InterruptedException e) &#123;</span><br><span class="line">           e.printStackTrace();</span><br><span class="line">       &#125;</span><br></pre></td></tr></table></figure>
+<p>结果为:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">返回值为2</span><br></pre></td></tr></table></figure>
+<h2 id="submit-Runnable-task"><a href="#submit-Runnable-task" class="headerlink" title="submit(Runnable task)"></a>submit(Runnable task)</h2><p>返回Future对象。但是接收的是Runnable对象，是没有返回值的。通过future.get获取的是null。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">ExecutorService executorService = Executors.newSingleThreadExecutor();</span><br><span class="line">       Future future = executorService.submit(new Runnable() &#123;</span><br><span class="line">           @Override</span><br><span class="line">           public void run() &#123;</span><br><span class="line"></span><br><span class="line">           &#125;</span><br><span class="line">       &#125;);</span><br><span class="line"></span><br><span class="line">       try &#123;</span><br><span class="line">           Log.i(TAG,&quot;返回值为&quot;+future.get());</span><br><span class="line">       &#125; catch (ExecutionException e) &#123;</span><br><span class="line">           e.printStackTrace();</span><br><span class="line">       &#125; catch (InterruptedException e) &#123;</span><br><span class="line">           e.printStackTrace();</span><br><span class="line">       &#125;</span><br></pre></td></tr></table></figure>
+<p>结果为:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">返回值为null</span><br></pre></td></tr></table></figure>
+<h2 id="invokeAll-Collection-lt-extends-Callable-gt-tasks"><a href="#invokeAll-Collection-lt-extends-Callable-gt-tasks" class="headerlink" title="invokeAll(Collection&lt;? extends Callable&gt; tasks)"></a>invokeAll(Collection&lt;? extends Callable<t>&gt; tasks)</t></h2><p>多个任务一起执行，返回所有任务执行完成的集合，返回结果是没有先后顺序的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">ExecutorService executorService = Executors.newSingleThreadExecutor();</span><br><span class="line">    Set&lt;Callable&lt;Integer&gt;&gt; callables = new HashSet&lt;&gt;();</span><br><span class="line">    callables.add(new Callable&lt;Integer&gt;() &#123;</span><br><span class="line">        @Override</span><br><span class="line">        public Integer call() throws Exception &#123;</span><br><span class="line">            return 1+1;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    callables.add(new Callable&lt;Integer&gt;() &#123;</span><br><span class="line">        @Override</span><br><span class="line">        public Integer call() throws Exception &#123;</span><br><span class="line">            return 1+2;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    callables.add(new Callable&lt;Integer&gt;() &#123;</span><br><span class="line">        @Override</span><br><span class="line">        public Integer call() throws Exception &#123;</span><br><span class="line">            return 1+3;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    try &#123;</span><br><span class="line">        List&lt;Future&lt;Integer&gt;&gt; futures = executorService.invokeAll(callables);</span><br><span class="line">        for (Future&lt;Integer&gt; future:futures)&#123;</span><br><span class="line">            try &#123;</span><br><span class="line">                Log.i(TAG, &quot;返回值为&quot; + future.get());</span><br><span class="line">            &#125; catch (ExecutionException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; catch (InterruptedException e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>结果为:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">返回值为3</span><br><span class="line">返回值为2</span><br><span class="line">返回值为4</span><br></pre></td></tr></table></figure>
+<h2 id="invokeAll-Collection-lt-extends-Callable-gt-tasks-long-timeout-TimeUnit-unit"><a href="#invokeAll-Collection-lt-extends-Callable-gt-tasks-long-timeout-TimeUnit-unit" class="headerlink" title="invokeAll(Collection&lt;? extends Callable&gt; tasks,long timeout, TimeUnit unit)"></a>invokeAll(Collection&lt;? extends Callable<t>&gt; tasks,long timeout, TimeUnit unit)</t></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">ExecutorService executorService = Executors.newFixedThreadPool(3);</span><br><span class="line">       Set&lt;Callable&lt;Integer&gt;&gt; callables = new HashSet&lt;&gt;();</span><br><span class="line">       callables.add(new Callable&lt;Integer&gt;() &#123;</span><br><span class="line">           @Override</span><br><span class="line">           public Integer call() throws Exception &#123;</span><br><span class="line">               return 1 + 1;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;);</span><br><span class="line">       callables.add(new Callable&lt;Integer&gt;() &#123;</span><br><span class="line">           @Override</span><br><span class="line">           public Integer call() throws Exception &#123;</span><br><span class="line">               Thread.sleep(3000);</span><br><span class="line">               return 1 + 2;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;);</span><br><span class="line">       callables.add(new Callable&lt;Integer&gt;() &#123;</span><br><span class="line">           @Override</span><br><span class="line">           public Integer call() throws Exception &#123;</span><br><span class="line">               Thread.sleep(1000);</span><br><span class="line">               return 1 + 3;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;);</span><br><span class="line">       Log.i(TAG, &quot;开始&quot; + System.currentTimeMillis());</span><br><span class="line">       try &#123;</span><br><span class="line">           List&lt;Future&lt;Integer&gt;&gt; futures = executorService.invokeAll(callables, 2, TimeUnit.SECONDS);</span><br><span class="line">           for (Future&lt;Integer&gt; future : futures) &#123;</span><br><span class="line">               try &#123;</span><br><span class="line">                   Log.i(TAG, &quot;返回值为&quot; + future.get());</span><br><span class="line">                   Log.i(TAG, &quot;结束&quot; + System.currentTimeMillis());</span><br><span class="line">               &#125; catch (ExecutionException e) &#123;</span><br><span class="line">                   e.printStackTrace();</span><br><span class="line">               &#125; catch (CancellationException e) &#123;</span><br><span class="line">                   Log.i(TAG, &quot;超时&quot;);</span><br><span class="line">                   Log.i(TAG, &quot;结束&quot; + System.currentTimeMillis());</span><br><span class="line">               &#125;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125; catch (InterruptedException e) &#123;</span><br><span class="line">           e.printStackTrace();</span><br><span class="line">       &#125;</span><br></pre></td></tr></table></figure>
+<p>结果为:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">开始1554889064811</span><br><span class="line">超时</span><br><span class="line">结束1554889066814</span><br><span class="line">返回值为2</span><br><span class="line">结束1554889066814</span><br><span class="line">返回值为4</span><br><span class="line">结束1554889066814</span><br></pre></td></tr></table></figure>
+<p>同时执行所有任务，限制超时时间。在规定时间内没有完成，会报CancellationException异常，表示此方法超时。注意创建线程池的方式，如果是多个线程，<br>则会统一分配。如果只是一个线程，那所有任务都是一个线程执行的。一个线程超时的话，那所有任务都显示超时。</p>
+<h2 id="invokeAny-Collection-lt-extends-Callable-gt-tasks"><a href="#invokeAny-Collection-lt-extends-Callable-gt-tasks" class="headerlink" title="invokeAny(Collection&lt;? extends Callable&gt; tasks)"></a>invokeAny(Collection&lt;? extends Callable<t>&gt; tasks)</t></h2><p>多个任务一起执行，返回运行最快的值。只返回一个值。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">ExecutorService executorService = Executors.newFixedThreadPool(3);</span><br><span class="line">       Set&lt;Callable&lt;Integer&gt;&gt; callables = new HashSet&lt;&gt;();</span><br><span class="line">       callables.add(new Callable&lt;Integer&gt;() &#123;</span><br><span class="line">           @Override</span><br><span class="line">           public Integer call() throws Exception &#123;</span><br><span class="line">               return 1 + 1;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;);</span><br><span class="line">       callables.add(new Callable&lt;Integer&gt;() &#123;</span><br><span class="line">           @Override</span><br><span class="line">           public Integer call() throws Exception &#123;</span><br><span class="line">               Thread.sleep(3000);</span><br><span class="line">               return 1 + 2;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;);</span><br><span class="line">       callables.add(new Callable&lt;Integer&gt;() &#123;</span><br><span class="line">           @Override</span><br><span class="line">           public Integer call() throws Exception &#123;</span><br><span class="line">               Thread.sleep(1000);</span><br><span class="line">               return 1 + 3;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;);</span><br><span class="line">       try &#123;</span><br><span class="line">          int result = executorService.invokeAny(callables);</span><br><span class="line">           Log.i(TAG, &quot;返回值为&quot; +result);</span><br><span class="line">       &#125; catch (InterruptedException e) &#123;</span><br><span class="line">           e.printStackTrace();</span><br><span class="line">       &#125; catch (ExecutionException e) &#123;</span><br><span class="line">           e.printStackTrace();</span><br><span class="line">       &#125;</span><br></pre></td></tr></table></figure>
+<p>结果为:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">返回值为2</span><br></pre></td></tr></table></figure>
+<h2 id="invokeAny-Collection-lt-extends-Callable-gt-tasks-long-timeout-TimeUnit-unit"><a href="#invokeAny-Collection-lt-extends-Callable-gt-tasks-long-timeout-TimeUnit-unit" class="headerlink" title="invokeAny(Collection&lt;? extends Callable&gt; tasks,long timeout, TimeUnit unit)"></a>invokeAny(Collection&lt;? extends Callable<t>&gt; tasks,long timeout, TimeUnit unit)</t></h2><p>在规定的超时时间内，获取返回值，如果没有，则表示超时。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">ExecutorService executorService = Executors.newFixedThreadPool(3);</span><br><span class="line">       Set&lt;Callable&lt;Integer&gt;&gt; callables = new HashSet&lt;&gt;();</span><br><span class="line">       callables.add(new Callable&lt;Integer&gt;() &#123;</span><br><span class="line">           @Override</span><br><span class="line">           public Integer call() throws Exception &#123;</span><br><span class="line">               Thread.sleep(1000);</span><br><span class="line">               return 1 + 1;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;);</span><br><span class="line">       callables.add(new Callable&lt;Integer&gt;() &#123;</span><br><span class="line">           @Override</span><br><span class="line">           public Integer call() throws Exception &#123;</span><br><span class="line">               Thread.sleep(3000);</span><br><span class="line">               return 1 + 2;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;);</span><br><span class="line">       callables.add(new Callable&lt;Integer&gt;() &#123;</span><br><span class="line">           @Override</span><br><span class="line">           public Integer call() throws Exception &#123;</span><br><span class="line">               Thread.sleep(3000);</span><br><span class="line">               return 1 + 3;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;);</span><br><span class="line">       try &#123;</span><br><span class="line">          int result = executorService.invokeAny(callables,2,TimeUnit.SECONDS);</span><br><span class="line">           Log.i(TAG, &quot;返回值为&quot; +result);</span><br><span class="line">       &#125; catch (InterruptedException e) &#123;</span><br><span class="line">           e.printStackTrace();</span><br><span class="line">       &#125; catch (ExecutionException e) &#123;</span><br><span class="line">           e.printStackTrace();</span><br><span class="line">       &#125; catch (TimeoutException e) &#123;</span><br><span class="line">           Log.i(TAG, &quot;超时&quot;);</span><br><span class="line">       &#125;</span><br></pre></td></tr></table></figure>
+<p>结果为:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">返回值为2</span><br></pre></td></tr></table></figure>
+<h1 id="构造方法"><a href="#构造方法" class="headerlink" title="构造方法"></a>构造方法</h1><h2 id="ExecutorService-executorService-Executors-newFixedThreadPool-5"><a href="#ExecutorService-executorService-Executors-newFixedThreadPool-5" class="headerlink" title="ExecutorService executorService = Executors.newFixedThreadPool(5)"></a>ExecutorService executorService = Executors.newFixedThreadPool(5)</h2><p>创建有规定个数线程的线程池，超出的线程会在队列中等待。返回的是ThreadPoolExecutor。</p>
+<h2 id="ExecutorService-executorService-Executors-newSingleThreadExecutor"><a href="#ExecutorService-executorService-Executors-newSingleThreadExecutor" class="headerlink" title="ExecutorService executorService = Executors.newSingleThreadExecutor()"></a>ExecutorService executorService = Executors.newSingleThreadExecutor()</h2><p>创建唯一线程的线程，保证所有任务都按照指定顺序执行。返回的是ThreadPoolExecutor。</p>
+<h2 id="ExecutorService-executorService-Executors-newCachedThreadPool"><a href="#ExecutorService-executorService-Executors-newCachedThreadPool" class="headerlink" title="ExecutorService executorService = Executors.newCachedThreadPool()"></a>ExecutorService executorService = Executors.newCachedThreadPool()</h2><p>创建一个可以缓存的线程池，如果线程池不够则主动扩充线程的个数。返回的是ThreadPoolExecutor。</p>
+<h2 id="ExecutorService-executorService-Executors-newScheduledThreadPool-5"><a href="#ExecutorService-executorService-Executors-newScheduledThreadPool-5" class="headerlink" title="ExecutorService executorService = Executors.newScheduledThreadPool(5)"></a>ExecutorService executorService = Executors.newScheduledThreadPool(5)</h2><p>创建规定个数线程的线程池，支持定时以及周期性任务执行。返回的是ScheduledThreadPoolExecutor。</p>
+<h2 id="ExecutorService-executorService-Executors-newSingleThreadScheduledExecutor"><a href="#ExecutorService-executorService-Executors-newSingleThreadScheduledExecutor" class="headerlink" title="ExecutorService executorService = Executors.newSingleThreadScheduledExecutor()"></a>ExecutorService executorService = Executors.newSingleThreadScheduledExecutor()</h2><p>创建唯一线程的线程，支持定时以及周期性任务执行。返回的是ScheduledThreadPoolExecutor。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://guxiaonian.github.io/2019/04/10/java/threadpool/ExecutorService/" data-id="cjuc1xcr60006ua64zrmfqpio" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/04/11/java/threadpool/ScheduledThreadPoolExecutor/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          ScheduledThreadPoolExecutor
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/04/10/java/thread/Thread/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Thread</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/04/11/java/threadpool/ThreadPoolExecutor/">ThreadPoolExecutor</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/11/java/threadpool/ScheduledThreadPoolExecutor/">ScheduledThreadPoolExecutor</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/10/java/threadpool/ExecutorService/">ExecutorService</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/10/java/thread/Thread/">Thread</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/10/java/thread/HandlerThread/">HandlerThread</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 guxiaonian<br>
+      Powered by <a href="https://github.com/guxiaonian/guxiaonian.github.io" target="_blank">Fairy</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<!--<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>-->
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
