@@ -391,7 +391,7 @@ async function getServiceWorker(channelName, src) {
 		const worker = navigator.serviceWorker
 		// @ts-expect-error if unsupported
 		if (!worker || worker.__proto__.constructor.name !== 'ServiceWorkerContainer') resolve({})
-		await worker.register(src, { scope: '../tests/' }).catch((error) => {
+		await worker.register(src, { scope: './' }).catch((error) => {
 			console.error(error)
 			return resolve({})
 		})
