@@ -399,6 +399,7 @@ async function getServiceWorker(channelName, src) {
 		broadcast.onmessage = (message) => {
 			worker.getRegistration(src).then((x) => x && x.unregister())
 			broadcast.close()
+			alert(message.data.ua)
 			resolve(message.data)
 		}
 		broadcast.postMessage({ type: 'fingerprint' })
